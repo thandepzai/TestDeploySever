@@ -12,6 +12,7 @@ interface findProps {
 }
 
 export class BaseService {
+	BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://test-deploy-sever.vercel.app'
 	BASE_ENDPOINT: string | undefined = ''
 	constructor(endpoint?: string) {
 		this.BASE_ENDPOINT = endpoint
@@ -126,22 +127,22 @@ export class BaseService {
 	search = async ({ params, header }: searchProps) => {
 		console.log('🚀 ~ file: BaseService.ts:128 ~ BaseService ~ search= ~ params:', params)
 		const convertParams = queryString.stringify(params ?? { page: 1, pageSize: 10 })
-		const endpoint = `${this.BASE_ENDPOINT}/search?${convertParams}`
+		const endpoint = `${this.BASE_URL}/${this.BASE_ENDPOINT}/search?${convertParams}`
 		return this.request.get(endpoint, header)
 	}
 
 	find = async (id: string, config?: any) => {
-		const endpoint = `${this.BASE_ENDPOINT}/${id}`
+		const endpoint = `${this.BASE_URL}/${this.BASE_ENDPOINT}/${id}`
 		return this.request.get(endpoint, {}, config)
 	}
 
 	remove = async (id: string, config?: any) => {
-		const endpoint = `${this.BASE_ENDPOINT}/${id}`
+		const endpoint = `${this.BASE_URL}/${this.BASE_ENDPOINT}/${id}`
 		return this.request.delete(endpoint, config)
 	}
 
 	save = async (data: any, config?: any) => {
-		let endpoint = `${this.BASE_ENDPOINT}`
+		let endpoint = `${this.BASE_URL}/${this.BASE_ENDPOINT}`
 
 		const searchTerm = 'http://127.0.0.1:5000/'
 		if (this.BASE_ENDPOINT && this.BASE_ENDPOINT.includes(searchTerm)) {
@@ -156,7 +157,7 @@ export class BaseService {
 	}
 
 	update = async (data: any, config?: any) => {
-		const endpoint = `${this.BASE_ENDPOINT}`
+		const endpoint = `${this.BASE_URL}/${this.BASE_ENDPOINT}`
 		return this.request.patch(endpoint, data, config)
 	}
 }
