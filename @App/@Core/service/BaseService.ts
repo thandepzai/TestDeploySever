@@ -5,12 +5,6 @@ export interface searchProps {
 	header?: any
 }
 
-interface findProps {
-	headers: any
-	config?: any
-	id: string
-}
-
 export class BaseService {
 	BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://test-deploy-sever.vercel.app'
 	BASE_ENDPOINT: string | undefined = ''
