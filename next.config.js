@@ -20,7 +20,7 @@ const nextConfig = {
 	},
 	serverRuntimeConfig: {
 		images: {
-			domains: ['ohaomxltnhpdriahjpvz.supabase.co'],
+			domains: ['*'],
 			formats: ['image/webp']
 		}
 	},
@@ -29,7 +29,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'ohaomxltnhpdriahjpvz.supabase.co',
+				hostname: '*',
 				port: '',
 				pathname: '/storage/v1/object/public/itx_storage/**'
 			}

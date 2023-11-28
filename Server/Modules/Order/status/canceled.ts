@@ -42,7 +42,8 @@ export default async function canceledOrder(req: NextApiRequest) {
 			where: { orderId: Number(orderId) }
 		})
 
-		const checkStatus = paymentOrder?.method === 'online' ? 'REFUND' : 'CANCELED'
+		const checkStatus =
+			paymentOrder?.method === 'online' && paymentOrder?.status !== 'REFUND' ? 'REFUND' : 'CANCELED'
 		const updateOrder = await prisma.order.update({
 			where: { id: Number(orderId) },
 			data: { status: checkStatus }

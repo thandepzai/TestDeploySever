@@ -1,4 +1,4 @@
-import { METHOD } from '@/const/app-const'
+import { BACKEND_SEVER, METHOD, TRAIN_PRODUCT_CHECK } from '@/const/app-const'
 import queryString from 'query-string'
 export interface searchProps {
 	params?: any
@@ -6,7 +6,7 @@ export interface searchProps {
 }
 
 export class BaseService {
-	BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://test-deploy-sever.vercel.app'
+	BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : BACKEND_SEVER
 	BASE_ENDPOINT: string | undefined = ''
 	constructor(endpoint?: string) {
 		this.BASE_ENDPOINT = endpoint
@@ -138,7 +138,7 @@ export class BaseService {
 	save = async (data: any, config?: any) => {
 		let endpoint = `${this.BASE_URL}/${this.BASE_ENDPOINT}`
 
-		const searchTerm = 'http://127.0.0.1:5000/'
+		const searchTerm = TRAIN_PRODUCT_CHECK
 		if (this.BASE_ENDPOINT && this.BASE_ENDPOINT.includes(searchTerm)) {
 			endpoint = this.BASE_ENDPOINT
 			return this.request.post(endpoint, { token: this.getToken() }, { 'Content-Type': 'application/json' })
