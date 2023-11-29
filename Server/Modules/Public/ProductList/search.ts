@@ -29,7 +29,8 @@ export default async function searchProductListPublic(req: NextApiRequest) {
 				where: {
 					ProductBrand: {
 						name: { contains: lowercaseBrand, mode: 'insensitive' }
-					}
+					},
+					deleted: 0
 				},
 				include: {
 					sizeProduct: true
@@ -75,7 +76,8 @@ export default async function searchProductListPublic(req: NextApiRequest) {
 				name: {
 					contains: lowercaseName,
 					mode: 'insensitive'
-				}
+				},
+				deleted: 0
 			},
 			include: {
 				sizeProduct: true
