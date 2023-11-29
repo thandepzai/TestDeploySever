@@ -8,6 +8,7 @@ interface BodyProps {
 }
 export default async function canceledOrder(req: NextApiRequest) {
 	const { orderId, status } = JSON.parse(req.body) as BodyProps
+	console.log('🚀 ~ file: canceled.ts:11 ~ canceledOrder ~ orderId:', orderId)
 	try {
 		const existingOrder = await prisma.order.findUnique({
 			where: { id: Number(orderId) }
@@ -43,7 +44,8 @@ export default async function canceledOrder(req: NextApiRequest) {
 		})
 
 		const checkStatus =
-			paymentOrder?.method === 'online' && paymentOrder?.status !== 'REFUND' ? 'REFUND' : 'CANCELED'
+			paymentOrder?.method === 'online' && existingOrder?.status !== 'REFUND' ? 'REFUND' : 'CANCELED'
+
 		const updateOrder = await prisma.order.update({
 			where: { id: Number(orderId) },
 			data: { status: checkStatus }

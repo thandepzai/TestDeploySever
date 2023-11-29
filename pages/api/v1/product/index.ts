@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { METHOD, STATUS_CODE } from '@/const/app-const'
-import { ResponseProps } from '@/network/services/api-handler'
 import createProduct from '@/Server/Modules/Product/create'
 import editProduct from '@/Server/Modules/Product/edit'
 
