@@ -5,5 +5,5 @@ export const TRAIN_PRODUCT_API = {
 }
 
 export const DASHBOARD_API = {
-	endpoint: '/api/v1/admin/dashboard'
+	endpoint: '/api/admin/dashboard'
 }
